@@ -6,30 +6,30 @@ VALUES ('engineering'),
 
 INSERT INTO role (title, salary, department_id)
 VALUES 
-('sales lead', 100000, 1),
-('salesperson', 80000, 1),
-('lead engineer', 150000, 2),
-('software engineer', 120000, 2),
-('account manager', 160000, 3),
-('accountant', 125000, 3),
-('legal team lead', 250000, 4),
-('lawyer', 190000, 4);
+('sales lead', 100000, 4),
+('salesperson', 80000, 4),
+('lead engineer', 150000, 1),
+('software engineer', 120000, 1),
+('account manager', 160000, 2),
+('accountant', 125000, 2),
+('legal team lead', 250000, 3),
+('lawyer', 190000, 3);
 
-INSERT INTO employee (first_name, last_name, role_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
-('John', 'Doe', 2),
-('Mike', 'Chan', 3),
-('Ashley', 'Rodriguez', 4),
-('Kevin', 'Tupik', 5),
-('Kunal', 'Singh', 6),
-('Malia', 'Brown', 7),
-('Sarah', 'Lourd', 8),
-('Tom', 'Allen', 9);
+('John', 'Doe', 1, null),
+('Mike', 'Chan', 2, 1),
+('Ashley', 'Rodriguez', 3, null),
+('Kevin', 'Tupik', 4, 3),
+('Kunal', 'Singh', 5, null),
+('Malia', 'Brown', 6, 5),
+('Sarah', 'Lourd', 7, null),
+('Tom', 'Allen', 8, 7);
 
-SELECT * FROM department;
-SELECT * FROM role;
-SELECT * FROM employee;
+-- SELECT * FROM department;
+-- SELECT * FROM role;
+-- SELECT * FROM employee;
 
--- SELECT department_name, title, salary, first_name, last_name FROM employee
--- JOIN employee ON employee.manager_id = employee.id
--- JOIN role ON employee.role_id = role.id;
+SELECT title, salary, employee.first_name ||' '|| employee.last_name AS employee, manager.first_name ||' '||manager.last_name AS manager FROM employee
+LEFT JOIN employee manager ON employee.manager_id = manager.id
+JOIN role ON employee.role_id = role.id;
