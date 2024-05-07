@@ -1,5 +1,6 @@
 const inquirer = require('inquirer')
 const { Pool } = require('pg')
+const logo = require('asciiart-logo')
 
 // Connect to database
 const pool = new Pool(
@@ -14,6 +15,9 @@ const pool = new Pool(
 pool.connect();
 
 function start() {
+    const logoText =  logo({name: 'Employee Tracker'}).render()
+    console.log(logoText);
+
     prompts()
 }
 
