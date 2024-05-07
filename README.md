@@ -1,6 +1,6 @@
 # Employee Tracker
   ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-  - [Link to walkthrough vieo]()
+  - [Link to walkthrough video](https://drive.google.com/file/d/15q8gFztHA6vbCYAlhYHzibzpmkTObYUX/view)
 
 ## Description
 Employee tracker is a terminal application that uses a database to keep track of employees, departments and job roles in a business. Not only can the user view all of the departments, employees, and roles, but they can add a department, new employee, or new role within their company. All data is displayed in a table format in the terminal for easy viewing. 
