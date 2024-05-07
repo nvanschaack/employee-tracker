@@ -38,25 +38,25 @@ function prompts() {
         .then((response) => {
             console.log(response.options)
             switch (response.options) {
-                case 'view all departments':
+                case 'View all departments':
                     viewDepts()
                     break;
-                case 'view all roles':
+                case 'View all roles':
                     viewRoles()
                     break;
-                case 'view all employees':
+                case 'View all employees':
                     viewEmployees()
                     break;
-                case 'add a department':
+                case 'Add a department':
                     addDepartment()
                     break;
-                case 'add a role':
+                case 'Add a role':
                     addRole()
                     break;
-                case 'add an employee':
+                case 'Add an employee':
                     addEmployee()
                     break;
-                case 'update an employee role':
+                case 'Update an employee role':
                     break;
                 default:
                     process.exit();
@@ -66,7 +66,7 @@ function prompts() {
 
 function viewDepts() {
     // WHEN I choose to view all departments THEN I am presented with a formatted table showing department names and department ids
-    pool.query('select * from department', function (error, { rows }) {
+    pool.query('SELECT * FROM department', function (error, { rows }) {
         console.table(rows);
         prompts()
     });
@@ -106,7 +106,15 @@ function addDepartment() {
         ]).then((answers) => {
             console.log(answers);
             //add the new department to the database
-            //put request?
+            pool.query(`INSERT INTO department (department_name) VALUES ($1)`, [answers.department_name], (error, { rows }) => {
+                if (error) {
+                    console.error(error)
+                } else {
+                    //returning an empty array
+                    console.log(rows)
+                    prompts()
+                }
+            })
         })
 
     })
@@ -133,7 +141,7 @@ function addEmployee() {
                     value: manager.id
                 }))
 
-            // what if the new employee doesnt have a manager? how do you account for that?
+            // what if the new employee doesnt have a manager? how do you account for that? - add something in manager array that gives back a not applicable option
 
             inquirer
                 .prompt([
@@ -162,7 +170,15 @@ function addEmployee() {
                 ]).then((answers) => {
                     console.log(answers);
                     //add the new employee to the database
-                    //put request?
+                    pool.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1)`, [lhhhliljlkj], (error, { rows }) => {
+                        if (error) {
+                            console.error(error)
+                        } else {
+                            //returning an empty array
+                            console.log(rows)
+                            prompts()
+                        }
+                    })
                 })
         })
     });
